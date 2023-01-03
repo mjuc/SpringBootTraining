@@ -1,4 +1,4 @@
-package org.demo.model;
+package org.demo.entity;
 
 
 import jakarta.persistence.*;
@@ -20,5 +20,32 @@ public class TrainingPOJO {
         this.id = id;
         this.type = type;
         this.date = date;
+    }
+    public TrainingPOJO(){
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
