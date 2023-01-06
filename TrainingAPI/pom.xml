@@ -4,7 +4,11 @@
   <groupId>org.example</groupId>
   <artifactId>TrainingAPI</artifactId>
   <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.source>19</maven.compiler.source>
+    <maven.compiler.target>19</maven.compiler.target>
+  </properties>
+    <version>1.0-SNAPSHOT</version>
   <name>TrainingAPI Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -28,9 +32,9 @@
       <version>3.0.0</version>
     </dependency>
     <dependency>
-      <groupId>com.mysql</groupId>
-      <artifactId>mysql-connector-j</artifactId>
-      <version>8.0.31</version>
+      <groupId>org.mariadb.jdbc</groupId>
+      <artifactId>mariadb-java-client</artifactId>
+      <version>3.0.6</version>
     </dependency>
   </dependencies>
   <build>
