@@ -11,11 +11,13 @@ import java.util.List;
 public class TrainingService {
     @Autowired
     private TrainingRepository trainingRepository;
-    public List<TrainingPOJO> allSessions(){
-        return trainingRepository.findAll();
-    }
 
-    public TrainingPOJO last(){
-        return null;
+
+    public List<TrainingPOJO> allSessions(){return trainingRepository.findAll();}
+
+    public TrainingPOJO last(){return trainingRepository.findTopByOrderByIdDesc();}
+
+    public void add(TrainingPOJO trainingPOJO){
+        trainingRepository.save(trainingPOJO);
     }
 }
