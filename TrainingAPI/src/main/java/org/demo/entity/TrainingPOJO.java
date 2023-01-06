@@ -16,8 +16,7 @@ public class TrainingPOJO {
     private String date;
 
 
-    public TrainingPOJO(int id, String type, String date) {
-        this.id = id;
+    public TrainingPOJO(String type, String date) {
         this.type = type;
         this.date = date;
     }
