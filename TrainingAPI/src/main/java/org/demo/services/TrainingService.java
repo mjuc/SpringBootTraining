@@ -14,7 +14,7 @@ public class TrainingService {
 
 
     public List<TrainingPOJO> allSessions(){return trainingRepository.findAll();}
-
+    public List<TrainingPOJO> getSessionsByType(String type){return trainingRepository.findByType(type);}
     public TrainingPOJO last(){return trainingRepository.findTopByOrderByIdDesc();}
 
     public void add(TrainingPOJO trainingPOJO){
