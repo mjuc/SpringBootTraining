@@ -1,6 +1,6 @@
 package org.demo.controllers;
 
-import org.demo.entity.TrainingPOJO;
+import org.demo.entity.Training;
 import org.demo.services.TrainingService;
 import org.demo.utils.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +20,15 @@ public class TrainingController {
     @Autowired
     private TrainingService trainingService;
     @GetMapping("/all")
-    public List<TrainingPOJO> getAllSessions(){
+    public List<Training> getAllSessions(){
         return trainingService.allSessions();
     }
     @GetMapping("/")
-    public TrainingPOJO last(){
+    public Training last(){
         return trainingService.last();
     }
     @GetMapping("/type/{type}")
-    public List<TrainingPOJO> getByType(@PathVariable("type") String type){
+    public List<Training> getByType(@PathVariable("type") String type){
         return trainingService.getSessionsByType(type);
     }
     @PostMapping(value = "/add",consumes = "application/json")
@@ -37,7 +37,7 @@ public class TrainingController {
         Parser parser = new Parser();
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date = format.format(new Date());
-        TrainingPOJO training = new TrainingPOJO(parser.parsedType(type),date);
+        Training training = new Training(parser.parsedType(type),date);
         trainingService.add(training);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(training.getId()).toUri();
 

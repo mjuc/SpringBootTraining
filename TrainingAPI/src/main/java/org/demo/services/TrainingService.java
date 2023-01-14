@@ -1,6 +1,6 @@
 package org.demo.services;
 
-import org.demo.entity.TrainingPOJO;
+import org.demo.entity.Training;
 import org.demo.repositories.TrainingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,11 @@ public class TrainingService {
     private TrainingRepository trainingRepository;
 
 
-    public List<TrainingPOJO> allSessions(){return trainingRepository.findAll();}
-    public List<TrainingPOJO> getSessionsByType(String type){return trainingRepository.findByType(type);}
-    public TrainingPOJO last(){return trainingRepository.findTopByOrderByIdDesc();}
+    public List<Training> allSessions(){return trainingRepository.findAll();}
+    public List<Training> getSessionsByType(String type){return trainingRepository.findByType(type);}
+    public Training last(){return trainingRepository.findTopByOrderByIdDesc();}
 
-    public void add(TrainingPOJO trainingPOJO){
-        trainingRepository.save(trainingPOJO);
+    public void add(Training training){
+        trainingRepository.save(training);
     }
 }

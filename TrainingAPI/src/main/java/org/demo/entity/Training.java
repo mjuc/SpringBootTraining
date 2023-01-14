@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "training_sessions")
-public class TrainingPOJO {
+public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -16,11 +16,11 @@ public class TrainingPOJO {
     private String date;
 
 
-    public TrainingPOJO(String type, String date) {
+    public Training(String type, String date) {
         this.type = type;
         this.date = date;
     }
-    public TrainingPOJO(){
+    public Training(){
 
     }
 
