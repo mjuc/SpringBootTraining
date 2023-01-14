@@ -19,19 +19,19 @@ import java.net.URI;
 public class TrainingController {
     @Autowired
     private TrainingService trainingService;
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<Training> getAllSessions(){
         return trainingService.allSessions();
     }
-    @GetMapping("/")
+    @GetMapping("/last")
     public Training last(){
         return trainingService.last();
     }
-    @GetMapping("/type/{type}")
+    @GetMapping("/{type}")
     public List<Training> getByType(@PathVariable("type") String type){
         return trainingService.getSessionsByType(type);
     }
-    @PostMapping(value = "/add",consumes = "application/json")
+    @PostMapping(value = "/",consumes = "application/json")
     public ResponseEntity<Object> add(@RequestBody String type){
         //Integer id = trainingService.allSessions().size() + 1;
         Parser parser = new Parser();
