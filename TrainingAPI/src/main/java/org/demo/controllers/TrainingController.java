@@ -3,7 +3,6 @@ package org.demo.controllers;
 import org.demo.entity.Training;
 import org.demo.request.TrainingType;
 import org.demo.services.TrainingService;
-import org.demo.utils.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
