@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -37,9 +38,7 @@ public class TrainingController {
     }
     @PostMapping(value = "/",consumes = "application/json")
     public ResponseEntity<Object> add(@RequestBody TrainingType type){
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        String date = format.format(new Date());
-        Training training = new Training(type.getType(), date);
+        Training training = new Training(type.getType(), LocalDateTime.now());
         trainingService.add(training);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(training.getId()).toUri();
 

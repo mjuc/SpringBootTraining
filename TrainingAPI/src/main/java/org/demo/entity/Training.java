@@ -3,20 +3,22 @@ package org.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "training_sessions")
 public class Training {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "type")
     private String type;
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
 
 
-    public Training(String type, String date) {
+    public Training(String type, LocalDateTime date) {
         this.type = type;
         this.date = date;
     }
@@ -28,7 +30,7 @@ public class Training {
         return id;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -36,7 +38,7 @@ public class Training {
         return type;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
