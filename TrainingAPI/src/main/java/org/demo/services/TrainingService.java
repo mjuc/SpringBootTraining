@@ -9,9 +9,11 @@ import java.util.List;
 
 @Service
 public class TrainingService {
-    @Autowired
     private TrainingRepository trainingRepository;
-
+    @Autowired
+    public TrainingService(TrainingRepository trainingRepository) {
+        this.trainingRepository = trainingRepository;
+    }
 
     public List<Training> allSessions(){return trainingRepository.findAll();}
     public List<Training> getSessionsByType(String type){return trainingRepository.findByType(type);}

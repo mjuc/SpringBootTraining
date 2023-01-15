@@ -17,8 +17,12 @@ import java.net.URI;
 @RestController
 @RequestMapping(path = "/trainings")
 public class TrainingController {
-    @Autowired
     private TrainingService trainingService;
+    @Autowired
+    public TrainingController(TrainingService trainingService) {
+        this.trainingService = trainingService;
+    }
+
     @GetMapping("/")
     public List<Training> getAllSessions(){
         return trainingService.allSessions();
