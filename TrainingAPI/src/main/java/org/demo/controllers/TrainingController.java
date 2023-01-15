@@ -1,6 +1,7 @@
 package org.demo.controllers;
 
 import org.demo.entity.Training;
+import org.demo.request.TrainingType;
 import org.demo.services.TrainingService;
 import org.demo.utils.Parser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,10 @@ public class TrainingController {
         return trainingService.getSessionsByType(type);
     }
     @PostMapping(value = "/",consumes = "application/json")
-    public ResponseEntity<Object> add(@RequestBody String type){
-        //Integer id = trainingService.allSessions().size() + 1;
-        Parser parser = new Parser();
+    public ResponseEntity<Object> add(@RequestBody TrainingType type){
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date = format.format(new Date());
-        Training training = new Training(parser.parsedType(type),date);
+        Training training = new Training(type.getType(), date);
         trainingService.add(training);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(training.getId()).toUri();
 

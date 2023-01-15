@@ -2,6 +2,9 @@ package org.demo.request;
 public class TrainingType {
     private String type;
 
+    public TrainingType() {
+    }
+
     public TrainingType(String type) {
         this.type = type;
     }
