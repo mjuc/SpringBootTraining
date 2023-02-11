@@ -1,4 +1,4 @@
-package org.demo.request;
+package org.demo.controllers.request;
 public class TrainingType {
     private String type;
 

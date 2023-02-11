@@ -1,7 +1,7 @@
 package org.demo.controllers;
 
 import org.demo.entity.Training;
-import org.demo.request.TrainingType;
+import org.demo.controllers.request.TrainingType;
 import org.demo.services.TrainingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
