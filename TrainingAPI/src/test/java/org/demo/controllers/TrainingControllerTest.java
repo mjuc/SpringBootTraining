@@ -1,5 +1,6 @@
 package org.demo.controllers;
 
+import org.demo.controllers.request.TrainingType;
 import org.demo.controllers.response.TrainingResponse;
 import org.demo.entity.Training;
 import org.demo.services.TrainingService;
@@ -8,12 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,8 +34,16 @@ class TrainingControllerTest {
     }
     @Test
     void testGetAllSessions(){
-        trainingController.getAllSessions();
+        var date = LocalDateTime.now();
+        when(trainingService.allSessions()).thenReturn(
+                List.of(new Training("test", date),
+                        new Training("type", date)));
+        var res = trainingController.getAllSessions();
         verify(trainingService).allSessions();
+        assertEquals(res.get(0).getType(),"test");
+        assertEquals(res.get(0).getDate(),date);
+        assertEquals(res.get(1).getType(),"type");
+        assertEquals(res.get(1).getDate(),date);
     }
     @Test
     void testLast(){
@@ -36,8 +51,8 @@ class TrainingControllerTest {
         when(trainingService.last()).thenReturn(new Training("type",date));
         var res = trainingController.last();
         verify(trainingService).last();
-        assertEquals(res.getType(),"type");
-        assertEquals(res.getDate(),date);
+        assertEquals("type",res.getType());
+        assertEquals(date,res.getDate());
     }
     @Test
     void testGetByType(){
@@ -47,8 +62,18 @@ class TrainingControllerTest {
         var res = trainingController.getByType("test");
         verify(trainingService).getSessionsByType("test");
         for (TrainingResponse t: res) {
-            assertEquals(t.getType(),"test");
+            assertEquals("test",t.getType());
         }
+    }
+    @Test
+    void testAdd(){
+        var training = new TrainingType();
+        var request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        training.setType("type");
+        var response = trainingController.add(training);
+        assertEquals("201 CREATED",response.getStatusCode().toString());
+        assertEquals("",response.getHeaders().getLocation().getPath());
     }
     
 }
