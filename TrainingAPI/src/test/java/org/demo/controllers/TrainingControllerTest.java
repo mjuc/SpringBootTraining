@@ -75,5 +75,4 @@ class TrainingControllerTest {
         assertEquals("201 CREATED",response.getStatusCode().toString());
         assertEquals("",response.getHeaders().getLocation().getPath());
     }
-    
 }
