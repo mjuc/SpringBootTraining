@@ -1,2 +1,9 @@
-package org.demo.controllers.request;public class UserRegistration {
+package org.demo.controllers.request;
+
+import lombok.Getter;
+
+@Getter
+public class UserRegistration {
+    private String username;
+    private String password;
 }
