@@ -19,4 +19,7 @@ public class UserService {
     public boolean usernameExists(String username){
         return  userRepository.findByUsername(username).isPresent();
     }
+    public void create(User user){
+        userRepository.save(user);
+    }
 }

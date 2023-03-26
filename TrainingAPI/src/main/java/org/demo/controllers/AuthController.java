@@ -2,8 +2,10 @@ package org.demo.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.demo.controllers.request.UserCreationRequest;
 import org.demo.controllers.request.UserRequest;
 import org.demo.controllers.response.UserResponse;
+import org.demo.entity.Role;
 import org.demo.entity.User;
 import org.demo.services.UserService;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
+import java.util.HashSet;
 
 import static java.util.stream.Collectors.joining;
 import static java.lang.String.format;
@@ -64,5 +67,22 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
+    @PostMapping("register")
+    public ResponseEntity<Object> register(@RequestBody @Valid UserCreationRequest request){
+        var user = new User();
+        var authorities = new HashSet<Role>();
+        var role = new Role(request.getAuthority());
+        authorities.add(role);
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setAuthorities(authorities);
+        user.setEnabled(true);
+        if (userService.usernameExists(request.getUsername())){
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+        }
+        else {
+            userService.create(user);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }
+    }
 }
