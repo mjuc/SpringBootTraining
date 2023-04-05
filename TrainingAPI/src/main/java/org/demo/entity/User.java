@@ -63,4 +63,8 @@ public class User extends ComparableEntity implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+    @Override
+    public Integer getId(){
+        return getId();
+    }
 }
