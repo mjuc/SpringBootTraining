@@ -15,10 +15,14 @@ public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "role_id")
     private int id;
     @Column(name = "authority")
     private String authority;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Role(String authority) {
         this.authority = authority;

@@ -20,20 +20,20 @@ import java.util.HashSet;
 public class User extends ComparableEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "user_id")
     private int id;
     @NotBlank
     @Size(max = 20)
+    @Column(name = "username")
     private String username;
-    @NotBlank
+     @NotBlank
     @Size(max = 120)
+    @Column(name = "password")
     private String password;
     @NotBlank
+    @Column(name = "enabled")
     private boolean enabled;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @OneToMany(mappedBy = "user",fetch=FetchType.EAGER)
     private Set<Role> authorities = new HashSet<>();
 
     public User() {
